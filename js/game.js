@@ -66,11 +66,15 @@
     return x;
   }
 
-  // The lowest y a cookie may sit at the top of its arc: clear of the HUD and title.
-  function ceilingY() {
-    var hud = document.querySelector(".hud").getBoundingClientRect();
+  // How high this cookie may fly. Only cookies whose column actually crosses the
+  // HUD need to clear it - everything else just has to clear the title, which
+  // lets most of the field fly a lot higher.
+  function ceilingY(x, size) {
     var title = document.querySelector(".game-title").getBoundingClientRect();
-    return Math.max(hud.bottom, title.bottom) + 14;
+    var hud = document.querySelector(".hud").getBoundingClientRect();
+    var ceil = title.bottom + 12;
+    if (x < hud.right && x + size > hud.left) ceil = Math.max(ceil, hud.bottom + 12);
+    return ceil;
   }
 
   function killFlight(el) {
@@ -87,21 +91,20 @@
 
     var h = field.clientHeight;
     var size = el.offsetWidth || 90;
-    var top = ceilingY();
+    var x0 = launchX(size);
+    var top = ceilingY(x0, size);
 
     var startY = h + 30;
-    // peak sits somewhere between the ceiling and roughly mid-field
-    var peakY = top + Math.random() * Math.max(60, h * 0.42 - top * 0.2);
+    // Peak high up the field - they should really shoot, not just bob into view.
+    var peakY = top + Math.random() * Math.max(80, h * 0.24);
     var endY = h + 50;
 
     var dir = Math.random() < 0.5 ? -1 : 1;
     var drift = dir * (10 + Math.random() * (narrow() ? 50 : 130));
     var spin = dir * (60 + Math.random() * 200);
 
-    // ~4.6-6.4s per arc vs the homepage's 3-4.9s
-    var dur = 4.6 + Math.random() * 1.8;
-
-    var x0 = launchX(size);
+    // ~5-6.8s per arc: a longer climb than before, kept slow enough to catch
+    var dur = 5 + Math.random() * 1.8;
     gsap.set(el, { x: x0, y: startY, rotation: -12 + Math.random() * 24, opacity: 1, scale: 1 });
 
     el._flight = gsap.timeline({
