@@ -281,6 +281,20 @@ a{color:var(--brown);text-decoration:none}
 .footer p{margin:.3rem 0;font-size:.9rem;opacity:.92}
 .footer a{color:var(--yellow)}
 
+/* ---------- cursor follower ---------- */
+.cursor-cookie{
+  position:fixed;top:0;left:0;
+  width:34px;height:auto;
+  pointer-events:none;          /* never eat a click */
+  z-index:200;                  /* above the nav and the game badge */
+  opacity:0;
+  will-change:transform;
+  filter:drop-shadow(0 4px 8px rgba(164,79,48,.35));
+}
+/* no cursor to follow on touch, and it is pure decoration */
+@media (hover:none),(pointer:coarse){.cursor-cookie{display:none}}
+@media (prefers-reduced-motion:reduce){.cursor-cookie{display:none}}
+
 /* ---------- utility ---------- */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 :focus-visible{outline:3px solid var(--brown);outline-offset:3px;border-radius:6px}

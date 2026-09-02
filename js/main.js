@@ -189,7 +189,69 @@
   }
 
   /* ---------------------------------------------------------
-     5. Generic scroll reveals
+     5. Chocolate chip cursor follower
+     --------------------------------------------------------- */
+  function cursorCookie() {
+    if (REDUCED) return;
+    // only where there is a real cursor to follow
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    var el = document.createElement("img");
+    el.className = "cursor-cookie";
+    el.src = "media/cookies/chocolate_chip-256.webp";
+    el.alt = "";
+    el.setAttribute("aria-hidden", "true");
+    document.body.appendChild(el);
+
+    gsap.set(el, { xPercent: -50, yPercent: -50, scale: 0.5 });
+
+    // quickTo reuses one tween per property instead of spawning a new tween on
+    // every pointermove - the difference matters at ~120 events/second.
+    var xTo = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
+    var yTo = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
+    var rTo = gsap.quickTo(el, "rotation", { duration: 1.1, ease: "power2" });
+
+    var lastX = null, spin = 0, shown = false;
+
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      xTo(e.clientX);
+      yTo(e.clientY);
+
+      // tilt with horizontal travel so it reads like the cookie is rolling
+      if (lastX !== null) {
+        spin += (e.clientX - lastX) * 0.55;
+        rTo(spin);
+      }
+      lastX = e.clientX;
+
+      if (!shown) {
+        shown = true;
+        gsap.to(el, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" });
+      }
+    }, { passive: true });
+
+    // hide it when the pointer leaves the window entirely
+    document.addEventListener("mouseleave", function () {
+      shown = false;
+      gsap.to(el, { opacity: 0, scale: 0.5, duration: 0.25, ease: "power2.in" });
+    });
+
+    // a little bigger over anything clickable
+    document.addEventListener("pointerover", function (e) {
+      if (e.target.closest("a, button, .flavour__stage")) {
+        gsap.to(el, { scale: 1.7, duration: 0.3, ease: "back.out(2)" });
+      }
+    });
+    document.addEventListener("pointerout", function (e) {
+      if (e.target.closest("a, button, .flavour__stage")) {
+        gsap.to(el, { scale: 1, duration: 0.3, ease: "power2.out" });
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
+     6. Generic scroll reveals
      --------------------------------------------------------- */
   function reveals() {
     var items = document.querySelectorAll("[data-fade]:not(.hero__inner [data-fade])");
@@ -210,6 +272,7 @@
     heroLaunch();
     badge();
     flavours();
+    cursorCookie();
     reveals();
     ScrollTrigger.refresh();
   }
