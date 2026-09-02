@@ -238,7 +238,38 @@ a{color:var(--brown);text-decoration:none}
 }
 
 /* ---------- story ---------- */
-.story{background:var(--pink-soft);border-radius:var(--r-lg) var(--r-lg) 0 0}
+/* The full pink carries this section; cream becomes the accent, showing up as
+   cutout doodles in the background. Body copy stays --brown-deep here: plain
+   --brown only reaches 3.68:1 on this pink. */
+.story{
+  background:var(--pink);
+  border-radius:var(--r-lg) var(--r-lg) 0 0;
+  position:relative;
+  overflow:hidden;
+}
+.story .wrap{position:relative;z-index:2}
+
+.doodles{position:absolute;inset:0;z-index:1;pointer-events:none}
+.doodle{
+  position:absolute;
+  color:var(--cream);
+  fill:currentColor;
+  width:var(--d-size,44px);
+  opacity:.9;
+}
+/* scattered, deliberately uneven - it should read as hand-placed */
+.doodle--a{--d-size:52px; top:9%;  left:4%;   transform:rotate(-12deg)}
+.doodle--b{--d-size:104px;top:62%; left:2%;   opacity:.65}
+.doodle--c{--d-size:76px; top:26%; left:44%;  transform:rotate(8deg); opacity:.7}
+.doodle--d{--d-size:34px; top:76%; left:38%;  transform:rotate(20deg)}
+.doodle--e{--d-size:22px; top:16%; left:30%;  opacity:.8}
+.doodle--f{--d-size:68px; top:84%; right:8%;  left:auto; transform:rotate(-6deg); opacity:.7}
+.doodle--g{--d-size:150px;top:-6%; right:-3%; left:auto; opacity:.5}
+
+@media (max-width:900px){
+  /* fewer shapes on small screens so they never crowd the copy */
+  .doodle--c,.doodle--e,.doodle--d{display:none}
+}
 .story__grid{display:grid;gap:clamp(2rem,5vw,4rem);align-items:center;grid-template-columns:1fr}
 @media (min-width:900px){.story__grid{grid-template-columns:1.05fr .95fr}}
 .story h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:1.2rem}
@@ -251,7 +282,9 @@ a{color:var(--brown);text-decoration:none}
 }
 
 /* ---------- boxes / pricing ---------- */
-.boxes{background:var(--pink-soft);padding-top:0}
+/* story is now the full pink, so boxes reads as its own lighter step and
+   needs its top padding back */
+.boxes{background:var(--pink-soft)}
 .boxes__head{text-align:center;margin-bottom:clamp(2rem,5vw,3.5rem)}
 .boxes__head h2{font-size:clamp(2rem,5vw,3.4rem)}
 .box-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));max-width:760px;margin-inline:auto}

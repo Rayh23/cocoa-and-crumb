@@ -5,9 +5,10 @@
 (function () {
   "use strict";
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var smoother = null;
 
   var COOKIES = [
     "media/cookies/chocolate_chip-256.webp",
@@ -17,6 +18,38 @@
     "media/cookies/coconut_chocolate-256.webp",
     "media/cookies/chocolatechip-256.webp"
   ];
+
+  /* ---------------------------------------------------------
+     0. Smooth scrolling
+     --------------------------------------------------------- */
+  function smoothScroll() {
+    // Never hijack the scrollbar for someone who asked for less motion.
+    if (REDUCED) return;
+    // Touch keeps its native scroll: momentum scrolling is already good there,
+    // and lerping it fights the platform (ScrollSmoother's own default too).
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (!document.getElementById("smooth-wrapper")) return;
+
+    smoother = ScrollSmoother.create({
+      wrapper: "#smooth-wrapper",
+      content: "#smooth-content",
+      smooth: 1,          // seconds to "catch up" - past ~1.5 it reads as lag
+      effects: true,      // enables data-speed / data-lag attributes
+      smoothTouch: 0,
+      normalizeScroll: true
+    });
+
+    // ScrollSmoother owns the scroll position, so native anchor jumps and
+    // CSS scroll-behavior no longer apply - route in-page links through it.
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      var id = a.getAttribute("href");
+      if (!id || id === "#" || !document.querySelector(id)) return;
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        smoother.scrollTo(id, true, "top top");
+      });
+    });
+  }
 
   /* ---------------------------------------------------------
      1. Hero headline
@@ -268,6 +301,7 @@
      boot
      --------------------------------------------------------- */
   function init() {
+    smoothScroll();
     heroText();
     heroLaunch();
     badge();

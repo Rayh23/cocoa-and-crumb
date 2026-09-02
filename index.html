@@ -35,10 +35,12 @@
   </ul>
 </nav>
 
+<div id="smooth-wrapper">
+<div id="smooth-content">
+
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero__inner">
-    <p class="eyebrow" data-fade>Small batch &middot; Baked to order</p>
     <h1 class="hero__title">
       <span class="line"><span class="hero-word">Cocoa</span></span>
       <span class="line"><span class="hero-word">&amp; Crumb</span></span>
@@ -57,15 +59,6 @@
   <div class="hero__stage" id="heroStage" aria-hidden="true"></div>
 </header>
 
-<!-- rotating game badge -->
-<a class="badge" href="game.html" id="gameBadge" aria-label="Play the cookie grab game">
-  <span class="badge__blob" id="badgeBlob">
-    <svg viewBox="0 0 200 200" aria-hidden="true">
-      <path fill="currentColor" d="M100 6c14 0 22 12 34 16s27-2 37 7 5 24 9 36 16 21 16 35-12 23-16 35-1 27-9 36-25 3-37 7-20 16-34 16-22-12-34-16-27 2-36-7-4-24-8-36S6 114 6 100s12-23 16-35-1-27 8-36 24-3 36-7S86 6 100 6Z"/>
-    </svg>
-  </span>
-  <span class="badge__label">Play<small>the</small>Game</span>
-</a>
 
 <!-- ============ FLAVOURS ============ -->
 <section class="section flavours" id="flavours">
@@ -162,6 +155,18 @@
 
 <!-- ============ STORY ============ -->
 <section class="section story" id="story">
+
+  <!-- cream cutout doodles: background character, purely decorative -->
+  <div class="doodles" aria-hidden="true">
+    <svg class="doodle doodle--a" viewBox="0 0 24 24"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12Z"/></svg>
+    <svg class="doodle doodle--b" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+    <svg class="doodle doodle--c" viewBox="0 0 40 14"><path d="M2 8c5-8 11 8 16 0s11 8 16 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <svg class="doodle doodle--d" viewBox="0 0 24 24"><path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12Z"/></svg>
+    <svg class="doodle doodle--e" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+    <svg class="doodle doodle--f" viewBox="0 0 40 14"><path d="M2 8c5-8 11 8 16 0s11 8 16 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <svg class="doodle doodle--g" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+  </div>
+
   <div class="wrap story__grid">
     <div>
       <p class="eyebrow" data-fade>Our story</p>
@@ -178,7 +183,7 @@
       </p>
     </div>
     <div class="story__photo" data-fade>
-      <img src="media/photos/white_chocolate_oreo-800.webp"
+      <img src="media/photos/white_chocolate_oreo-800.webp" data-speed="0.9"
            alt="A tray of freshly baked cookies and cream cookies" loading="lazy">
     </div>
   </div>
@@ -236,9 +241,22 @@
     <p><a href="https://www.instagram.com/cocoaandcrumb_byray/" target="_blank" rel="noopener noreferrer">@cocoaandcrumb_byray</a></p>
   </div>
 </footer>
+</div>
+</div>
+
+<!-- rotating game badge -->
+<a class="badge" href="game.html" id="gameBadge" aria-label="Play the cookie grab game">
+  <span class="badge__blob" id="badgeBlob">
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <path fill="currentColor" d="M100 6c14 0 22 12 34 16s27-2 37 7 5 24 9 36 16 21 16 35-12 23-16 35-1 27-9 36-25 3-37 7-20 16-34 16-22-12-34-16-27 2-36-7-4-24-8-36S6 114 6 100s12-23 16-35-1-27 8-36 24-3 36-7S86 6 100 6Z"/>
+    </svg>
+  </span>
+  <span class="badge__label">Play<small>the</small>Game</span>
+</a>
 
 <script src="vendor/gsap/gsap.min.js"></script>
 <script src="vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="vendor/gsap/ScrollSmoother.min.js"></script>
 <script src="vendor/gsap/SplitText.min.js"></script>
 <script src="js/main.js"></script>
 </body>
