@@ -98,16 +98,16 @@ a{color:var(--brown);text-decoration:none}
 .nav__brand img{width:46px;height:46px;border-radius:50%}
 .nav__brand span{font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--brown);line-height:1.1}
 .nav__links{display:flex;align-items:center;gap:clamp(.8rem,2vw,2rem);list-style:none;margin:0;padding:0}
-.nav__links a{
+.nav__links a:not(.btn){
   font-family:var(--font-display);font-weight:500;font-size:.95rem;
   padding:.4rem .2rem;position:relative;
 }
-.nav__links a::after{
+.nav__links a:not(.btn)::after{
   content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
   background:var(--pink-deep);border-radius:3px;
   transform:scaleX(0);transform-origin:left;transition:transform .3s;
 }
-.nav__links a:hover::after{transform:scaleX(1)}
+.nav__links a:not(.btn):hover::after{transform:scaleX(1)}
 @media (max-width:720px){
   .nav__links li:not(.nav__cta){display:none}
   .nav__brand span{display:none}
@@ -165,7 +165,7 @@ a{color:var(--brown);text-decoration:none}
   font-size:clamp(.8rem,1.5vw,.95rem);line-height:1;text-transform:uppercase;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
-.badge__label small{display:block;font-size:.62em;letter-spacing:.12em;margin:.18em 0}
+.badge__label small{display:block;font-size:max(11px,.62em);letter-spacing:.12em;margin:.18em 0}
 .badge:hover .badge__label{transform:scale(1.06)}
 
 /* ---------- flavours (no cards - blobs + curved names) ---------- */
@@ -226,14 +226,14 @@ a{color:var(--brown);text-decoration:none}
 }
 .flavour__crumb{position:absolute;width:16px;z-index:1;opacity:0;pointer-events:none}
 .flavour h3{font-size:1.45rem;margin-bottom:.35rem}
-.flavour p{margin:0 auto;max-width:30ch;color:var(--brown-deep);font-size:.98rem}
+.flavour p{margin:0 auto;max-width:30ch;color:var(--brown-deep);font-size:1rem}
 
 .flavour--soon .flavour__cookie{opacity:.3;filter:none;width:46%}
 .flavour__soon{
   position:absolute;z-index:3;top:50%;left:50%;transform:translate(-50%,-50%);
   font-family:var(--font-display);font-weight:700;color:var(--brown);
   background:var(--cream);border:2.5px dashed var(--brown);
-  padding:.45rem 1.15rem;border-radius:var(--r-pill);
+  padding:.55rem 1.15rem;border-radius:var(--r-pill);
   font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;
 }
 
@@ -264,7 +264,7 @@ a{color:var(--brown);text-decoration:none}
 .box:hover{transform:translateY(-6px)}
 .box__count{font-family:var(--font-display);font-weight:700;font-size:1.3rem;color:var(--brown)}
 .box__price{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,7vw,3.4rem);color:var(--brown);line-height:1;margin:.4rem 0}
-.box__note{font-size:.92rem;color:var(--brown-deep);opacity:.85}
+.box__note{font-size:1rem;color:var(--brown-deep);opacity:.85}
 .boxes__foot{text-align:center;margin-top:2.5rem;color:var(--brown-deep)}
 .boxes__foot strong{color:var(--brown-deep)}
 
