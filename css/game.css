@@ -21,7 +21,7 @@
 }
 .game-title small{
   display:block;font-family:var(--font-body);font-weight:600;
-  font-size:clamp(.8rem,1.6vw,1rem);color:var(--brown-deep);
+  font-size:clamp(.8rem,1.6vw,1rem);color:var(--brown);
   text-transform:none;letter-spacing:0;margin-top:.4rem;
 }
 
@@ -30,7 +30,7 @@
   position:absolute;top:0;left:0;
   width:var(--size,96px);
   cursor:grab;touch-action:none;z-index:10;
-  filter:drop-shadow(0 12px 18px rgba(164,79,48,.3));
+  filter:drop-shadow(0 12px 18px rgba(109,65,42,.3));
   will-change:transform;user-select:none;-webkit-user-drag:none;
 }
 .cookie:active{cursor:grabbing}
@@ -49,7 +49,7 @@
   width:var(--bag-w);
   transform:translateX(-50%);
   z-index:5;pointer-events:none;
-  filter:drop-shadow(0 20px 26px rgba(164,79,48,.3));
+  filter:drop-shadow(0 20px 26px rgba(109,65,42,.3));
 }
 .game-bag__hint{
   position:absolute;left:50%;
@@ -125,7 +125,7 @@
 }
 .over__verdict{
   font-size:clamp(1.3rem,4vw,2rem);font-family:var(--font-display);
-  font-weight:700;color:var(--brown-deep);margin-bottom:1.8rem;
+  font-weight:700;color:var(--brown);margin-bottom:1.8rem;
 }
 .over__actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 

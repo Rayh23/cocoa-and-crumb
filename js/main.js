@@ -78,6 +78,8 @@
         } else if (self.scroll() > 220) {
           slide.reverse();            // scrolling down, past the hero - hide it
         }
+        // the bar and its underline only exist once the page has moved
+        nav.classList.toggle("nav--stuck", self.scroll() > 40);
       }
     });
   }

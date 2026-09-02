@@ -42,18 +42,19 @@ Colours come from the brand palette:
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| `--cream` | `#fefcf8` | page background |
-| `--pink` | `#fec1d0` | flavour blobs |
+| `--cream` | `#fefcf8` | flavours + game background |
+| `--pink` | `#fec1d0` | hero and story sections, flavour blobs |
 | `--peach` | `#fed1c1` | flavour blobs |
 | `--yellow` | `#ffed9c` | game badge, HUD |
-| `--brown` | `#a44f30` | headings, buttons |
-| `--brown-deep` | `#7d3a22` | body copy |
+| `--brown` | `#6d412a` | all text, headings, buttons |
+| `--brown-deep` | `#4e2f1e` | depth and button shadows only, never text |
 
 Type is [Fredoka](https://fonts.google.com/specimen/Fredoka) for display and
 [Nunito](https://fonts.google.com/specimen/Nunito) for body.
 
-All text meets WCAG AA contrast. Note that `--brown` on `--pink-soft` is only
-4.31:1, so body copy on pink sections uses `--brown-deep` instead.
+All text meets WCAG AA contrast. `--brown` clears 4.5:1 on every background in
+the palette (5.64:1 at worst, on the full pink), so one brown carries all text
+and `--brown-deep` is reserved for shadows.
 
 ## Notes for future edits
 
@@ -67,6 +68,12 @@ All text meets WCAG AA contrast. Note that `--brown` on `--pink-soft` is only
 - **The flavour name rings sway rather than rotate.** A full rotation turns the
   name upside-down for half of every cycle.
 - The pink bag appears **only in the game** — it is not the real packaging.
+- **The header is transparent at the top of the page** and only gains its bar
+  and underline once scrolled, so the hero reads as one clean field. It also
+  hides on scroll down and returns on scroll up.
+- Smooth scrolling is ScrollSmoother at `smooth: 1`. Fixed elements (nav, game
+  badge, cursor cookie) must stay **outside** `#smooth-content` or they scroll
+  away with the page.
 - `prefers-reduced-motion` is respected throughout.
 
 ## Running locally
