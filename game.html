@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grab Them All! — Cocoa &amp; Crumb by Ray</title>
+<meta name="description" content="A 30-second cookie grabbing game from Cocoa &amp; Crumb by Ray. Drag as many cookies into the bag as you can.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="media/logo-128.webp">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/game.css">
+</head>
+<body class="game-body">
+
+<a class="game-back" href="index.html">
+  <img src="media/logo-128.webp" alt="" width="32" height="32">
+  <span>Back to site</span>
+</a>
+
+<h1 class="game-title">
+  Grab Them All!
+  <small>Drag the cookies into the bag before the timer runs out.</small>
+</h1>
+
+<!-- HUD -->
+<div class="hud">
+  <p class="hud__label">Time left</p>
+  <p class="hud__value" id="timeValue">00:30</p>
+  <p class="hud__label">Your score</p>
+  <p class="hud__value hud__value--score" id="scoreValue">0<span>cookies</span></p>
+  <button class="hud__stop" id="stopBtn" type="button">Stop</button>
+</div>
+
+<!-- playfield -->
+<div class="game-field" id="field" aria-hidden="true">
+  <span class="game-bag__hint" id="bagHint">Drop them in here</span>
+  <img class="game-bag" id="bag" src="media/bag-600.webp" alt="">
+</div>
+
+<p class="sr-only" aria-live="polite" id="srStatus">Game starting.</p>
+
+<!-- game over -->
+<div class="over" id="over" hidden>
+  <div class="over__inner">
+    <h2 id="overTitle">Time&rsquo;s up! Your score is:</h2>
+    <p class="over__score" id="overScore">0</p>
+    <p class="over__points">Cookies</p>
+    <p class="over__verdict" id="overVerdict">Lucky you!</p>
+    <div class="over__actions">
+      <button class="btn" id="againBtn" type="button">Play again</button>
+      <a class="btn btn--ghost" href="index.html">Back to home</a>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/gsap/gsap.min.js"></script>
+<script src="vendor/gsap/Draggable.min.js"></script>
+<script src="vendor/gsap/InertiaPlugin.min.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

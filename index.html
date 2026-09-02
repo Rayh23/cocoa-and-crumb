@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cocoa &amp; Crumb by Ray — Really good cookies</title>
+<meta name="description" content="Cocoa &amp; Crumb by Ray — small-batch cookies baked with lots of chocolate, plenty of love and a tiny bit of obsession over the perfect bite. Collection only.">
+
+<meta property="og:title" content="Cocoa &amp; Crumb by Ray">
+<meta property="og:description" content="Really good cookies, baked in small batches. Boxes of 6 and 12.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="media/photos/white_chocolate_oreo-800.webp">
+
+<link rel="icon" href="media/logo-128.webp">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a class="nav__brand" href="index.html">
+    <img src="media/logo-128.webp" alt="Cocoa &amp; Crumb by Ray logo" width="46" height="46">
+    <span>Cocoa &amp; Crumb</span>
+  </a>
+  <ul class="nav__links">
+    <li><a href="#flavours">Flavours</a></li>
+    <li><a href="#story">Our story</a></li>
+    <li><a href="#boxes">Boxes</a></li>
+    <li class="nav__cta"><a class="btn" href="#order">Order now</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero__inner">
+    <p class="eyebrow" data-fade>Small batch &middot; Baked to order</p>
+    <h1 class="hero__title">
+      <span class="line"><span class="hero-word">Cocoa</span></span>
+      <span class="line"><span class="hero-word">&amp; Crumb</span></span>
+    </h1>
+    <p class="hero__sub" data-fade>
+      Really good cookies &mdash; the kind that make you say
+      <em>&ldquo;okay, just one more&rdquo;</em> and somehow end up with crumbs everywhere.
+    </p>
+    <div class="hero__actions" data-fade>
+      <a class="btn" href="#flavours">See the flavours</a>
+      <a class="btn btn--ghost" href="#order">Order a box</a>
+    </div>
+  </div>
+
+  <!-- cookies launch up from the bottom of the hero -->
+  <div class="hero__stage" id="heroStage" aria-hidden="true"></div>
+</header>
+
+<!-- rotating game badge -->
+<a class="badge" href="game.html" id="gameBadge" aria-label="Play the cookie grab game">
+  <span class="badge__blob" id="badgeBlob">
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <path fill="currentColor" d="M100 6c14 0 22 12 34 16s27-2 37 7 5 24 9 36 16 21 16 35-12 23-16 35-1 27-9 36-25 3-37 7-20 16-34 16-22-12-34-16-27 2-36-7-4-24-8-36S6 114 6 100s12-23 16-35-1-27 8-36 24-3 36-7S86 6 100 6Z"/>
+    </svg>
+  </span>
+  <span class="badge__label">Play<small>the</small>Game</span>
+</a>
+
+<!-- ============ FLAVOURS ============ -->
+<section class="section flavours" id="flavours">
+  <div class="wrap">
+    <div class="flavours__head">
+      <p class="eyebrow">The line-up</p>
+      <h2>Pick your favourite</h2>
+      <p>Six flavours, baked in small batches. Hover a cookie &mdash; it might just jump.</p>
+    </div>
+
+    <div class="flavour-grid" id="flavourGrid">
+
+      <article class="flavour" data-flavour>
+        <div class="flavour__stage">
+          <div class="flavour__blob"></div>
+          <svg class="flavour__ring" viewBox="0 0 300 300" aria-hidden="true">
+            <defs><path id="ring1" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"></path></defs>
+            <text><textPath href="#ring1" startOffset="25%" text-anchor="middle">Chocolate Chip</textPath></text>
+          </svg>
+          <img class="flavour__cookie" src="media/cookies/chocolate_chip-400.webp" alt="Chocolate chip cookie" loading="lazy">
+        </div>
+        <h3>Chocolate Chip</h3>
+        <p>Soft, buttery and packed with chocolate chips.</p>
+      </article>
+
+      <article class="flavour" data-flavour>
+        <div class="flavour__stage">
+          <div class="flavour__blob"></div>
+          <svg class="flavour__ring" viewBox="0 0 300 300" aria-hidden="true">
+            <defs><path id="ring2" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"></path></defs>
+            <text><textPath href="#ring2" startOffset="25%" text-anchor="middle">Red Velvet White Chip</textPath></text>
+          </svg>
+          <img class="flavour__cookie" src="media/cookies/red_velvet-400.webp" alt="Red velvet cookie with white chocolate chips" loading="lazy">
+        </div>
+        <h3>Red Velvet White Chip</h3>
+        <p>Rich red velvet with creamy white chocolate throughout.</p>
+      </article>
+
+      <article class="flavour flavour--soon" data-flavour>
+        <div class="flavour__stage">
+          <div class="flavour__blob"></div>
+          <svg class="flavour__ring" viewBox="0 0 300 300" aria-hidden="true">
+            <defs><path id="ring3" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"></path></defs>
+            <text><textPath href="#ring3" startOffset="25%" text-anchor="middle">Double Chocolate</textPath></text>
+          </svg>
+          <span class="flavour__soon">Photo coming soon</span>
+        </div>
+        <h3>Double Chocolate</h3>
+        <p>Deeply chocolatey, fudgy and loaded with chocolate.</p>
+      </article>
+
+      <article class="flavour" data-flavour>
+        <div class="flavour__stage">
+          <div class="flavour__blob"></div>
+          <svg class="flavour__ring" viewBox="0 0 300 300" aria-hidden="true">
+            <defs><path id="ring4" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"></path></defs>
+            <text><textPath href="#ring4" startOffset="25%" text-anchor="middle">Cookies &amp; Cream</textPath></text>
+          </svg>
+          <img class="flavour__cookie" src="media/cookies/orea_white_chocolate-400.webp" alt="Cookies and cream cookie with Oreo pieces and white chocolate" loading="lazy">
+        </div>
+        <h3>Cookies &amp; Cream</h3>
+        <p>Chocolate cookie goodness with Oreo pieces and white chocolate.</p>
+      </article>
+
+      <article class="flavour" data-flavour>
+        <div class="flavour__stage">
+          <div class="flavour__blob"></div>
+          <svg class="flavour__ring" viewBox="0 0 300 300" aria-hidden="true">
+            <defs><path id="ring5" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"></path></defs>
+            <text><textPath href="#ring5" startOffset="25%" text-anchor="middle">Coconut Chocolate</textPath></text>
+          </svg>
+          <img class="flavour__cookie" src="media/cookies/coconut_chocolate-400.webp" alt="Chocolate cookie with a coconut centre" loading="lazy">
+        </div>
+        <h3>Coconut Chocolate</h3>
+        <p>A rich chocolate cookie with a sweet, smooth coconut centre.</p>
+      </article>
+
+      <article class="flavour" data-flavour>
+        <div class="flavour__stage">
+          <div class="flavour__blob"></div>
+          <svg class="flavour__ring" viewBox="0 0 300 300" aria-hidden="true">
+            <defs><path id="ring6" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"></path></defs>
+            <text><textPath href="#ring6" startOffset="25%" text-anchor="middle">Lemon White Chip</textPath></text>
+          </svg>
+          <img class="flavour__cookie" src="media/cookies/frosted_lemon-400.webp" alt="Lemon cookie with white chocolate" loading="lazy">
+        </div>
+        <h3>Lemon White Chip</h3>
+        <p>Bright, zesty lemon balanced with creamy white chocolate.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="section story" id="story">
+  <div class="wrap story__grid">
+    <div>
+      <p class="eyebrow" data-fade>Our story</p>
+      <h2 data-fade>Hi, I&rsquo;m the crumb behind the cookies.</h2>
+      <p data-fade>
+        Cocoa &amp; Crumb is my little corner of the internet dedicated to one very
+        important thing: really good cookies.
+      </p>
+      <p data-fade>
+        I love baking the kind of treats that make you say <em>&ldquo;okay, just one more&rdquo;</em>
+        and somehow end up with crumbs everywhere. Everything is made with lots of
+        chocolate, plenty of love, and a tiny bit of obsession over getting that
+        perfect bite.
+      </p>
+    </div>
+    <div class="story__photo" data-fade>
+      <img src="media/photos/white_chocolate_oreo-800.webp"
+           alt="A tray of freshly baked cookies and cream cookies" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOXES ============ -->
+<section class="section boxes" id="boxes">
+  <div class="wrap">
+    <div class="boxes__head">
+      <p class="eyebrow" data-fade>A box of happiness</p>
+      <h2 data-fade>Pick your box</h2>
+    </div>
+    <div class="box-grid">
+      <div class="box" data-fade>
+        <p class="box__count">6 cookies</p>
+        <p class="box__price">$27</p>
+        <p class="box__note">Perfect for a treat at home.</p>
+      </div>
+      <div class="box" data-fade>
+        <p class="box__count">12 cookies</p>
+        <p class="box__price">$50</p>
+        <p class="box__note">For sharing &mdash; or not. No judgement.</p>
+      </div>
+    </div>
+    <div class="boxes__foot" data-fade>
+      <p><strong>Feeding a crowd? Ordering for an event?</strong><br>
+      Larger orders are available on request. &#129312;</p>
+      <p><strong>Collection only</strong> &mdash; no delivery at this time.<br>
+      Once your order is ready, you&rsquo;ll receive the pickup details and a time to collect your cookies. &#129312;</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ORDER ============ -->
+<section class="section order" id="order">
+  <div class="wrap">
+    <h2 data-fade>Ready for cookies?</h2>
+    <p data-fade>
+      Slide into the DMs to place your order. Tell me your flavours, your box size
+      and when you&rsquo;d like to collect &mdash; I&rsquo;ll take care of the rest.
+    </p>
+    <a class="btn" href="https://www.instagram.com/cocoaandcrumb_byray/"
+       target="_blank" rel="noopener noreferrer" data-fade>
+      Order on Instagram &mdash; @cocoaandcrumb_byray
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <img src="media/logo-256.webp" alt="Cocoa &amp; Crumb by Ray logo" width="64" height="64" loading="lazy">
+    <p>Cocoa &amp; Crumb by Ray &mdash; really good cookies.</p>
+    <p>Collection only. Larger orders on request.</p>
+    <p><a href="https://www.instagram.com/cocoaandcrumb_byray/" target="_blank" rel="noopener noreferrer">@cocoaandcrumb_byray</a></p>
+  </div>
+</footer>
+
+<script src="vendor/gsap/gsap.min.js"></script>
+<script src="vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="vendor/gsap/SplitText.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

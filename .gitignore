@@ -1,0 +1,15 @@
+# dependencies (GSAP is vendored into vendor/gsap/ instead)
+node_modules/
+
+# working source material: large originals, inspiration, raw photos.
+# The site only ships the optimised files in media/.
+Assets/
+
+# tooling / scratch
+.playwright-mcp/
+*.log
+.DS_Store
+Thumbs.db
+
+# tooling cache
+.impeccable/
