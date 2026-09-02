@@ -23,6 +23,9 @@
   --r-pill:999px;
   --shadow-lift:0 30px 60px -20px rgba(164,79,48,.45);
   --wrap:min(1200px,92vw);
+
+  /* one display size for every section heading */
+  --fs-display:clamp(2.2rem,6vw,4rem);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -96,10 +99,10 @@ a{color:var(--brown);text-decoration:none}
 }
 .nav__brand{display:flex;align-items:center;gap:.7rem}
 .nav__brand img{width:46px;height:46px;border-radius:50%}
-.nav__brand span{font-family:var(--font-display);font-weight:700;font-size:1.05rem;color:var(--brown);line-height:1.1}
+.nav__brand span{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--brown);line-height:1.1}
 .nav__links{display:flex;align-items:center;gap:clamp(.8rem,2vw,2rem);list-style:none;margin:0;padding:0}
 .nav__links a:not(.btn){
-  font-family:var(--font-display);font-weight:500;font-size:.95rem;
+  font-family:var(--font-display);font-weight:500;font-size:1rem;
   padding:.4rem .2rem;position:relative;
 }
 .nav__links a:not(.btn)::after{
@@ -132,7 +135,7 @@ a{color:var(--brown);text-decoration:none}
 .hero__title .line{display:block;overflow:hidden}
 .hero__sub{
   max-width:44ch;margin:1.6rem auto 2.2rem;
-  font-size:clamp(1rem,.95rem + .4vw,1.3rem);
+  font-size:clamp(1.05rem,.95rem + .6vw,1.45rem);
   color:var(--brown-deep);
 }
 .hero__actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
@@ -162,7 +165,7 @@ a{color:var(--brown);text-decoration:none}
 .badge__label{
   position:relative;z-index:2;text-align:center;
   font-family:var(--font-display);font-weight:700;color:var(--brown);
-  font-size:clamp(.8rem,1.5vw,.95rem);line-height:1;text-transform:uppercase;
+  font-size:clamp(.85rem,1.5vw,1rem);line-height:1;text-transform:uppercase;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
 .badge__label small{display:block;font-size:max(11px,.62em);letter-spacing:.12em;margin:.18em 0}
@@ -171,7 +174,7 @@ a{color:var(--brown);text-decoration:none}
 /* ---------- flavours (no cards - blobs + curved names) ---------- */
 .flavours{background:var(--cream);position:relative}
 .flavours__head{text-align:center;max-width:52ch;margin:0 auto clamp(2.5rem,6vw,4.5rem)}
-.flavours__head h2{font-size:clamp(2.2rem,6vw,4rem)}
+.flavours__head h2{font-size:var(--fs-display)}
 
 .flavour-grid{
   display:grid;
@@ -226,7 +229,7 @@ a{color:var(--brown);text-decoration:none}
 }
 .flavour__crumb{position:absolute;width:16px;z-index:1;opacity:0;pointer-events:none}
 .flavour h3{font-size:1.45rem;margin-bottom:.35rem}
-.flavour p{margin:0 auto;max-width:30ch;color:var(--brown-deep);font-size:1rem}
+.flavour p{margin:0 auto;max-width:30ch;color:var(--brown-deep)}
 
 .flavour--soon .flavour__cookie{opacity:.3;filter:none;width:46%}
 .flavour__soon{
@@ -252,8 +255,8 @@ a{color:var(--brown);text-decoration:none}
 .doodles{position:absolute;inset:0;z-index:1;pointer-events:none}
 .doodle{
   position:absolute;
-  color:var(--cream);
-  fill:currentColor;
+  fill:var(--cream);
+  stroke:var(--cream);
   width:var(--d-size,44px);
   opacity:.9;
 }
@@ -272,7 +275,7 @@ a{color:var(--brown);text-decoration:none}
 }
 .story__grid{display:grid;gap:clamp(2rem,5vw,4rem);align-items:center;grid-template-columns:1fr}
 @media (min-width:900px){.story__grid{grid-template-columns:1.05fr .95fr}}
-.story h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:1.2rem}
+.story h2{font-size:var(--fs-display);margin-bottom:1.2rem}
 .story p{color:var(--brown-deep);margin:0 0 1.1rem;max-width:52ch}
 .story em{color:var(--brown-deep);font-style:italic;font-weight:700}
 .story__photo img{
@@ -286,7 +289,7 @@ a{color:var(--brown);text-decoration:none}
    needs its top padding back */
 .boxes{background:var(--pink-soft)}
 .boxes__head{text-align:center;margin-bottom:clamp(2rem,5vw,3.5rem)}
-.boxes__head h2{font-size:clamp(2rem,5vw,3.4rem)}
+.boxes__head h2{font-size:var(--fs-display)}
 .box-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));max-width:760px;margin-inline:auto}
 .box{
   background:var(--cream);border:3px solid var(--brown);
@@ -295,15 +298,15 @@ a{color:var(--brown);text-decoration:none}
   transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
 .box:hover{transform:translateY(-6px)}
-.box__count{font-family:var(--font-display);font-weight:700;font-size:1.3rem;color:var(--brown)}
-.box__price{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,7vw,3.4rem);color:var(--brown);line-height:1;margin:.4rem 0}
-.box__note{font-size:1rem;color:var(--brown-deep);opacity:.85}
+.box__count{font-family:var(--font-display);font-weight:700;font-size:1.125rem;color:var(--brown)}
+.box__price{font-family:var(--font-display);font-weight:700;font-size:var(--fs-display);color:var(--brown);line-height:1;margin:.4rem 0}
+.box__note{color:var(--brown-deep);opacity:.85}
 .boxes__foot{text-align:center;margin-top:2.5rem;color:var(--brown-deep)}
 .boxes__foot strong{color:var(--brown-deep)}
 
 /* ---------- order / instagram ---------- */
 .order{background:var(--brown);color:var(--cream);text-align:center;border-radius:var(--r-lg) var(--r-lg) 0 0}
-.order h2{color:var(--cream);font-size:clamp(2rem,6vw,3.6rem);margin-bottom:1rem}
+.order h2{color:var(--cream);font-size:var(--fs-display);margin-bottom:1rem}
 .order p{max-width:46ch;margin:0 auto 2rem;opacity:.92}
 .order .btn{background:var(--yellow);color:var(--brown);border-color:var(--yellow);box-shadow:0 6px 0 -1px #e6ce77}
 .order .btn:hover{box-shadow:0 10px 0 -1px #e6ce77}
@@ -311,7 +314,7 @@ a{color:var(--brown);text-decoration:none}
 /* ---------- footer ---------- */
 .footer{background:var(--brown);color:var(--cream);padding:2.5rem 0 3.5rem;text-align:center}
 .footer img{width:64px;height:64px;border-radius:50%;margin:0 auto 1rem}
-.footer p{margin:.3rem 0;font-size:.9rem;opacity:.92}
+.footer p{margin:.3rem 0;font-size:1rem;opacity:.92}
 .footer a{color:var(--yellow)}
 
 /* ---------- cursor follower ---------- */

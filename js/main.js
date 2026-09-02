@@ -52,6 +52,37 @@
   }
 
   /* ---------------------------------------------------------
+     0b. Direction-aware header
+     --------------------------------------------------------- */
+  function directionalNav() {
+    var nav = document.querySelector(".nav");
+    if (!nav) return;
+    // Reduced motion keeps the header permanently visible rather than sliding.
+    if (REDUCED) return;
+
+    // A "from" tween parked at progress 1, i.e. sitting in its visible state.
+    // play() brings it down, reverse() tucks it away.
+    var slide = gsap.from(nav, {
+      yPercent: -100,
+      paused: true,
+      duration: 0.4,
+      ease: "power2.out"
+    }).progress(1);
+
+    ScrollTrigger.create({
+      start: "top top",
+      end: "max",
+      onUpdate: function (self) {
+        if (self.direction === -1) {
+          slide.play();               // scrolling up - bring it back
+        } else if (self.scroll() > 220) {
+          slide.reverse();            // scrolling down, past the hero - hide it
+        }
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
      1. Hero headline
      --------------------------------------------------------- */
   function heroText() {
@@ -302,6 +333,7 @@
      --------------------------------------------------------- */
   function init() {
     smoothScroll();
+    directionalNav();
     heroText();
     heroLaunch();
     badge();
