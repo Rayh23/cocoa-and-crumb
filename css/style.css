@@ -80,7 +80,9 @@ a{color:var(--brown);text-decoration:none}
 }
 .btn:hover{transform:translateY(-3px);box-shadow:0 10px 0 -1px var(--brown-deep)}
 .btn:active{transform:translateY(2px);box-shadow:0 3px 0 -1px var(--brown-deep)}
-.btn--ghost{background:transparent;color:var(--brown);box-shadow:0 6px 0 -1px var(--pink-deep)}
+/* brown-deep, not brown: on hover the background turns --pink-soft, where
+   --brown is only 4.31:1. */
+.btn--ghost{background:transparent;color:var(--brown-deep);box-shadow:0 6px 0 -1px var(--pink-deep)}
 .btn--ghost:hover{background:var(--pink-soft)}
 
 /* ---------- nav ---------- */

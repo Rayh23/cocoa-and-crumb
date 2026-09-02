@@ -103,8 +103,9 @@
     var drift = dir * (10 + Math.random() * (narrow() ? 50 : 130));
     var spin = dir * (60 + Math.random() * 200);
 
-    // ~5-6.8s per arc: a longer climb than before, kept slow enough to catch
-    var dur = 5 + Math.random() * 1.8;
+    // Same speed as the homepage burst (3-4.9s per arc) - the slower version
+    // made the game too easy.
+    var dur = 3 + Math.random() * 1.9;
     gsap.set(el, { x: x0, y: startY, rotation: -12 + Math.random() * 24, opacity: 1, scale: 1 });
 
     el._flight = gsap.timeline({
