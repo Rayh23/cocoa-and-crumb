@@ -35,16 +35,25 @@
 }
 .cookie:active{cursor:grabbing}
 
-/* the bag you drop them into */
+/* the bag you drop them into.
+   The bag art is 427x503, so it renders 1.18x its width tall. The hint is
+   offset from that real height - deriving it from the width alone put the
+   label behind the bag. */
+.game-body{
+  --bag-w:clamp(170px,21vw,270px);
+  --bag-ratio:1.18;
+  --bag-bottom:0px;
+}
 .game-bag{
-  position:absolute;left:50%;bottom:-2vh;
-  width:clamp(180px,24vw,300px);
+  position:absolute;left:50%;bottom:var(--bag-bottom);
+  width:var(--bag-w);
   transform:translateX(-50%);
   z-index:5;pointer-events:none;
   filter:drop-shadow(0 20px 26px rgba(164,79,48,.3));
 }
 .game-bag__hint{
-  position:absolute;left:50%;bottom:calc(clamp(180px,24vw,300px) * 1.06);
+  position:absolute;left:50%;
+  bottom:calc(var(--bag-bottom) + var(--bag-w) * var(--bag-ratio) + .8rem);
   transform:translateX(-50%);
   z-index:5;pointer-events:none;white-space:nowrap;
   font-family:var(--font-display);font-weight:600;font-size:.9rem;
@@ -139,6 +148,7 @@
   .hud__value{margin:0;font-size:1.15rem;padding:.25rem .4rem}
   .hud__stop{width:auto;padding:.7rem 1.1rem;font-size:.9rem}
 
+  .game-body{--bag-w:clamp(150px,42vw,200px)}
   .game-title{top:7.8rem;font-size:1.5rem}
   .game-title small{font-size:.8rem;margin-top:.25rem}
   .game-bag__hint{font-size:.8rem}
