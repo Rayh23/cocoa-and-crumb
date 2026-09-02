@@ -23,7 +23,8 @@
   --r-lg:2.5rem;
   --r-pill:999px;
   --shadow-lift:0 30px 60px -20px rgba(109,65,42,.45);
-  --wrap:min(1200px,92vw);
+  --wrap-max:1200px;
+  --gutter:clamp(1.25rem,4vw,2.5rem);
 
   /* one display size for every section heading */
   --fs-display:clamp(2.2rem,6vw,4rem);
@@ -57,8 +58,8 @@ h1,h2,h3,.display{
 img{max-width:100%;display:block}
 a{color:var(--brown);text-decoration:none}
 
-.wrap{width:var(--wrap);margin-inline:auto}
-.section{padding:clamp(4rem,9vw,7.5rem) 0;position:relative}
+.wrap{max-width:var(--wrap-max);margin-inline:auto}
+.section{padding:clamp(4rem,9vw,7.5rem) var(--gutter);position:relative}
 
 .eyebrow{
   font-family:var(--font-display);
@@ -73,7 +74,7 @@ a{color:var(--brown);text-decoration:none}
 /* ---------- buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;gap:.55rem;
-  font-family:var(--font-display);font-weight:600;font-size:1rem;
+  font-family:var(--font-display);font-weight:600;font-size:1.125rem;
   padding:.95rem 2rem;border-radius:var(--r-pill);
   border:2.5px solid var(--brown);
   background:var(--brown);color:var(--cream);
@@ -97,16 +98,16 @@ a{color:var(--brown);text-decoration:none}
   transition:background-color .3s ease, border-color .3s ease, backdrop-filter .3s ease;
 }
 .nav--stuck{
-  background:rgba(254,252,248,.82);
+  background:color-mix(in srgb, var(--cream) 82%, transparent);
   backdrop-filter:blur(12px);
   border-bottom-color:var(--pink-soft);
 }
 .nav__brand{display:flex;align-items:center;gap:.7rem}
 .nav__brand img{width:46px;height:46px;border-radius:50%}
-.nav__brand span{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--brown);line-height:1.1}
+.nav__brand span{font-family:var(--font-display);font-weight:700;font-size:1.125rem;color:var(--brown);line-height:1.1}
 .nav__links{display:flex;align-items:center;gap:clamp(.8rem,2vw,2rem);list-style:none;margin:0;padding:0}
 .nav__links a:not(.btn){
-  font-family:var(--font-display);font-weight:500;font-size:1rem;
+  font-family:var(--font-display);font-weight:500;font-size:1.125rem;
   padding:.4rem .2rem;position:relative;
 }
 .nav__links a:not(.btn)::after{
@@ -124,10 +125,10 @@ a{color:var(--brown);text-decoration:none}
 .hero{
   position:relative;min-height:100svh;
   display:grid;place-items:center;
-  padding:7rem 0 0;overflow:hidden;
+  padding:7rem var(--gutter) 0;overflow:hidden;
   background:var(--pink);
 }
-.hero__inner{width:var(--wrap);text-align:center;position:relative;z-index:3}
+.hero__inner{max-width:var(--wrap-max);margin-inline:auto;text-align:center;position:relative;z-index:3}
 .hero__title{
   font-size:clamp(3rem,12vw,9.5rem);
   text-transform:uppercase;
@@ -167,7 +168,7 @@ a{color:var(--brown);text-decoration:none}
 .badge__label{
   position:relative;z-index:2;text-align:center;
   font-family:var(--font-display);font-weight:700;color:var(--brown);
-  font-size:clamp(.85rem,1.5vw,1rem);line-height:1;text-transform:uppercase;
+  font-size:clamp(.95rem,1.5vw,1.125rem);line-height:1;text-transform:uppercase;
   transition:transform .3s cubic-bezier(.34,1.56,.64,1);
 }
 .badge__label small{display:block;font-size:max(11px,.62em);letter-spacing:.12em;margin:.18em 0}
@@ -219,7 +220,7 @@ a{color:var(--brown);text-decoration:none}
 .flavour__ring{position:absolute;inset:-4%;width:108%;height:108%;overflow:visible;pointer-events:none}
 .flavour__ring text{
   font-family:var(--font-display);font-weight:600;
-  font-size:16px;letter-spacing:.16em;text-transform:uppercase;
+  font-size:18px;letter-spacing:.16em;text-transform:uppercase;
   fill:var(--brown);
 }
 .flavour__cookie{
@@ -311,9 +312,9 @@ a{color:var(--brown);text-decoration:none}
 .order .btn:hover{box-shadow:0 10px 0 -1px #e6ce77}
 
 /* ---------- footer ---------- */
-.footer{background:var(--brown);color:var(--cream);padding:2.5rem 0 3.5rem;text-align:center}
+.footer{background:var(--brown);color:var(--cream);padding:2.5rem var(--gutter) 3.5rem;text-align:center}
 .footer img{width:64px;height:64px;border-radius:50%;margin:0 auto 1rem}
-.footer p{margin:.3rem 0;font-size:1rem;opacity:.92}
+.footer p{margin:.3rem 0;font-size:1.125rem;opacity:.92}
 .footer a{color:var(--yellow)}
 
 /* ---------- cursor follower ---------- */
