@@ -70,9 +70,16 @@ and `--brown-deep` is reserved for shadows.
 ## Notes for future edits
 
 - **Cookie images** are cut out from photos shot on plain white. To add one,
-  shoot it top-down on white and remove the background with a flood fill from
-  the image borders — a plain white-threshold key eats white chocolate chips
-  and frosting.
+  shoot it top-down on white, then:
+  1. Flood fill from the image borders, never a plain white threshold — a
+     global key eats white chocolate chips, coconut and frosting.
+  2. Threshold around 210, not 240. A photo's edge is anti-aliased, so a high
+     threshold leaves a pale rim *inside* the mask.
+  3. Erode the mask ~3px so the boundary sits on real cookie pixels.
+  4. Extend cookie colour outward (nearest-neighbour via distance transform)
+     before feathering the alpha. Otherwise semi-transparent edge pixels keep
+     the white background colour, and the page background bleeds through the
+     outline. This is what went wrong on the coconut cookie.
 - **The blob morph is CSS, not GSAP** (`@keyframes blobMorph`). GSAP's string
   interpolation drops the `/` half of an 8-value `border-radius`, which
   flattens the blobs into squircles.
