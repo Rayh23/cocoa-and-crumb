@@ -49,8 +49,19 @@ Colours come from the brand palette:
 | `--brown` | `#6d412a` | all text, headings, buttons |
 | `--brown-deep` | `#4e2f1e` | depth and button shadows only, never text |
 
-Type is [Fredoka](https://fonts.google.com/specimen/Fredoka) for display and
-[Nunito](https://fonts.google.com/specimen/Nunito) for body.
+Type:
+
+| Token | Face | Used for |
+| --- | --- | --- |
+| `--font-hero` | Atma Bold | the hero wordmark only |
+| `--font-script` | Yuyu | the "by Ray" signature only |
+| `--font-display` | Fredoka | every other heading, nav, buttons |
+| `--font-body` | Nunito | body copy |
+
+Atma and Yuyu are **self-hosted** from `fonts/` as WOFF2 (OFL licensed — the
+licence files sit beside them, which the OFL requires). Both are preloaded in
+`index.html` since they paint above the fold. Fredoka and Nunito still come
+from Google Fonts.
 
 All text meets WCAG AA contrast. `--brown` clears 4.5:1 on every background in
 the palette (5.64:1 at worst, on the full pink), so one brown carries all text
@@ -74,6 +85,13 @@ and `--brown-deep` is reserved for shadows.
 - Smooth scrolling is ScrollSmoother at `smooth: 1`. Fixed elements (nav, game
   badge, cursor cookie) must stay **outside** `#smooth-content` or they scroll
   away with the page.
+- **The "by Ray" signature is zero-width** (`flex:0 0 0; width:0`) and offset
+  with a transform. Give it real width and it pushes "& CRUMB" 37px off-centre
+  from "COCOA".
+- **The hero type carries a pink halo** (`text-shadow` in `--pink`). Cookies fly
+  behind the wordmark, and brown text over a brown cookie loses contrast; the
+  halo is invisible on flat pink but separates the type from anything passing
+  behind it.
 - `prefers-reduced-motion` is respected throughout.
 
 ## Running locally

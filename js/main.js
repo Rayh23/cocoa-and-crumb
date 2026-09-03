@@ -107,6 +107,17 @@
       stagger: 0.09
     });
 
+    // the signature lands last, like it is being written on
+    tl.from(".hero__by", {
+      opacity: 0,
+      y: 14,
+      rotation: -20,
+      scale: 0.8,
+      duration: 0.7,
+      ease: "back.out(1.7)",
+      transformOrigin: "left bottom"
+    }, "-=0.5");
+
     tl.from(".hero__inner [data-fade]", {
       y: 26,
       opacity: 0,

@@ -4,6 +4,20 @@
             brown #6d412a - peach #fed1c1
    ============================================================ */
 
+/* Self-hosted, OFL licensed (see fonts/OFL-*.txt).
+   Atma carries the hero name only - Fredoka still runs every other heading,
+   which is the "clean and simple" Ray wanted elsewhere. */
+@font-face{
+  font-family:"Atma";
+  src:url("../fonts/Atma-Bold.woff2") format("woff2");
+  font-weight:700;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"Yuyu";
+  src:url("../fonts/Yuyu-Regular.woff2") format("woff2");
+  font-weight:400;font-style:normal;font-display:swap;
+}
+
 :root{
   --cream:#fefcf8;
   --yellow:#ffed9c;
@@ -18,6 +32,8 @@
   --ink:#4a2415;
 
   --font-display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --font-hero:"Atma","Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --font-script:"Yuyu","Segoe Script",cursive;
   --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
 
   --r-lg:2.5rem;
@@ -130,16 +146,39 @@ a{color:var(--brown);text-decoration:none}
 }
 .hero__inner{max-width:var(--wrap-max);margin-inline:auto;text-align:center;position:relative;z-index:3}
 .hero__title{
+  font-family:var(--font-hero);
   font-size:clamp(3rem,12vw,9.5rem);
   text-transform:uppercase;
-  letter-spacing:-.03em;
-  line-height:.86;
+  letter-spacing:-.02em;
+  line-height:.9;
+  text-shadow:0 0 6px var(--pink),0 0 14px var(--pink),0 0 26px var(--pink);
 }
-.hero__title .line{display:block;overflow:hidden}
+/* Each line is a flex row so "by Ray" can sit beside the last word. The
+   slide-up reveal is clipped by .mask, not .line - putting overflow on the
+   row itself would crop the rotated signature. */
+.hero__title .line{
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.hero__title .mask{display:block;overflow:hidden;padding-bottom:.04em}
+.hero__by{
+  font-family:var(--font-script);
+  font-size:clamp(1.15rem,2.4vw,2.1rem);
+  text-transform:none;letter-spacing:0;line-height:1;
+  transform:rotate(-8deg) translateX(.4em);
+  white-space:nowrap;
+  padding-bottom:.75em;
+  color:var(--brown);
+  /* Zero-width so the signature hangs off the wordmark instead of pushing
+     "& CRUMB" off-centre from "COCOA" - it was 37px out otherwise. */
+  flex:0 0 0;
+  width:0;
+  overflow:visible;
+}
 .hero__sub{
   max-width:44ch;margin:1.6rem auto 2.2rem;
   font-size:clamp(1.05rem,.95rem + .6vw,1.45rem);
   color:var(--brown);
+  text-shadow:0 0 6px var(--pink),0 0 14px var(--pink),0 0 26px var(--pink);
 }
 .hero__actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
