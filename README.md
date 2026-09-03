@@ -1,118 +1,140 @@
-# Cocoa &amp; Crumb by Ray
+# Cocoa & Crumb by Ray
 
-A static marketing site for Cocoa &amp; Crumb by Ray, a small-batch cookie business —
-plus a 30-second "Grab Them All!" mini game.
+An interactive marketing site for my small-batch cookie business, built from
+scratch with vanilla HTML, CSS and JavaScript, with a 30-second drag-and-catch
+cookie game tucked inside.
 
-Orders are taken by DM on Instagram: [@cocoaandcrumb_byray](https://www.instagram.com/cocoaandcrumb_byray/).
-Collection only, no delivery.
+I designed the brand, visual system, content, assets and interaction direction,
+then used Claude Code as an AI pair programmer to turn that specification into a
+working site.
 
-## Stack
+The result is a small project, but it became a useful experiment in AI-assisted
+development, human evaluation and knowing when a technically successful solution
+isn't actually the right one.
 
-Plain HTML, CSS and JavaScript — no framework and no build step. The repository
-*is* the site, so deploying is just a push.
+**Live:** https://rayh23.github.io/cocoa-and-crumb
 
-[GSAP 3.15](https://gsap.com) drives the motion. The plugin files are **vendored**
-into `vendor/gsap/` rather than loaded from a CDN, so the site keeps working
-offline and on locked-down networks.
+**Instagram:** [@cocoaandcrumb_byray](https://www.instagram.com/cocoaandcrumb_byray/)
 
-| Plugin | Used for |
-| --- | --- |
-| `gsap` | core tweens and timelines |
-| `ScrollTrigger` | section reveals on scroll |
-| `SplitText` | hero headline entrance |
-| `Draggable` + `InertiaPlugin` | grabbing and throwing cookies in the game |
+---
 
-## Layout
+## What I built
 
-```
-index.html        homepage
-game.html         the mini game
-css/style.css     site styles, design tokens, palette
-css/game.css      game-only styles
-js/main.js        homepage motion
-js/game.js        game logic
-media/            optimised images actually shipped (WebP)
-vendor/gsap/      pinned GSAP builds
-Assets/           working originals - git-ignored, not deployed
-```
+I wanted to make more than a bakery template. The site combines a playful visual
+identity with real product photography, animated interactions, collection-only
+ordering, and a small game designed to give visitors a reason to explore.
 
-## Design system
+The project was also an experiment in AI-assisted development. I used Claude Code
+as a pair programmer for implementation, debugging, image processing and
+optimisation, but treated its output as something to evaluate rather than
+something to blindly accept.
 
-Colours come from the brand palette:
+That distinction mattered.
 
-| Token | Hex | Role |
-| --- | --- | --- |
-| `--cream` | `#fefcf8` | flavours + game background |
-| `--pink` | `#fec1d0` | hero and story sections, flavour blobs |
-| `--peach` | `#fed1c1` | flavour blobs |
-| `--yellow` | `#ffed9c` | game badge, HUD |
-| `--brown` | `#6d412a` | all text, headings, buttons |
-| `--brown-deep` | `#4e2f1e` | depth and button shadows only, never text |
+Claude could make something technically better according to a metric while making
+the actual result worse. For example, an image-cleanup process reduced the
+measured amount of background colour on a cookie edge, but it was doing so by
+deleting real coconut flakes. I caught the problem visually, changed the
+evaluation criteria, and corrected the pipeline.
 
-Type:
+The lesson: AI can accelerate implementation, but it still needs someone who
+understands the intended outcome well enough to recognise when the optimisation
+target is wrong.
 
-| Token | Face | Used for |
-| --- | --- | --- |
-| `--font-hero` | Atma Bold | the hero wordmark only |
-| `--font-script` | Yuyu | the "by Ray" signature only |
-| `--font-display` | Fredoka | every other heading, nav, buttons |
-| `--font-body` | Nunito | body copy |
+---
 
-Atma and Yuyu are **self-hosted** from `fonts/` as WOFF2 (OFL licensed — the
-licence files sit beside them, which the OFL requires). Both are preloaded in
-`index.html` since they paint above the fold. Fredoka and Nunito still come
-from Google Fonts.
+## Highlights
 
-All text meets WCAG AA contrast. `--brown` clears 4.5:1 on every background in
-the palette (5.64:1 at worst, on the full pink), so one brown carries all text
-and `--brown-deep` is reserved for shadows.
+- Built as a framework-free static site with no build step or backend.
+- Created custom interactions with GSAP, including smooth scrolling, magnetic
+  buttons, cursor-following effects and draggable game mechanics.
+- Processed and optimised my own cookie photography rather than using stock
+  imagery.
+- Built an image background-removal approach using edge-connected flood fill to
+  preserve white ingredients such as coconut and white chocolate.
+- Audited 55 text elements for WCAG AA contrast and corrected an initially
+  failing colour combination.
+- Added `prefers-reduced-motion`, keyboard interaction and screen-reader feedback
+  for the game.
+- Self-hosted fonts and optimised images, keeping the deployed site at
+  approximately 2.3 MB.
+- Deployed the same repository through GitHub Pages and Cloudflare Pages.
 
-## Notes for future edits
+---
 
-- **Cookie images** are cut out from photos shot on plain white. To add one,
-  shoot it top-down on white, then:
-  1. Flood fill from the image borders, never a plain white threshold — a
-     global key eats white chocolate chips, coconut and frosting.
-  2. Keep the threshold STRICT (~248). A lower threshold flood-fills straight
-     through white coconut flakes and frosting on the silhouette and tears
-     them into spikes. Measure it: perimeter / sqrt(area) went 5.28 -> 7.35
-     when the threshold dropped to 210.
-  3. Do NOT erode the mask. Erosion chews the same light details.
-  4. Extend cookie colour outward into the OUTSIDE pixels only
-     (nearest-neighbour via a distance transform), then feather the alpha
-     ~0.6px. Inside pixels must keep their real colour or white coconut gets
-     darkened into the chocolate.
+## Tech
 
-  Judge the result by eye on the actual background. A "share of light edge
-  pixels" metric cannot tell a white coconut flake from white background, and
-  optimising against it deletes real coconut.
-- **The blob morph is CSS, not GSAP** (`@keyframes blobMorph`). GSAP's string
-  interpolation drops the `/` half of an 8-value `border-radius`, which
-  flattens the blobs into squircles.
-- **The flavour name rings sway rather than rotate.** A full rotation turns the
-  name upside-down for half of every cycle.
-- The pink bag appears **only in the game** — it is not the real packaging.
-- **The header is transparent at the top of the page** and only gains its bar
-  and underline once scrolled, so the hero reads as one clean field. It also
-  hides on scroll down and returns on scroll up.
-- Smooth scrolling is ScrollSmoother at `smooth: 1`. Fixed elements (nav, game
-  badge, cursor cookie) must stay **outside** `#smooth-content` or they scroll
-  away with the page.
-- **The "by Ray" signature is zero-width** (`flex:0 0 0; width:0`) and offset
-  with a transform. Give it real width and it pushes "& CRUMB" 37px off-centre
-  from "COCOA".
-- **The hero type carries a pink halo** (`text-shadow` in `--pink`). Cookies fly
-  behind the wordmark, and brown text over a brown cookie loses contrast; the
-  halo is invisible on flat pink but separates the type from anything passing
-  behind it.
-- **Order CTAs are magnetic** (`[data-magnetic]`). They lean toward the cursor
-  at 0.34 of its offset while it is within 80px of the button, then spring back
-  with an elastic ease. GSAP owns their inline transform, so the CSS `:hover`
-  lift is disabled for them or the two fight.
-- **The footer overlaps the order section by 1px** (`margin-top:-1px`). Both are
-  brown, but ScrollSmoother translates by fractional pixels, so the seam rounds
-  independently and flashes a hairline of the cream body while scrolling.
-- `prefers-reduced-motion` is respected throughout.
+HTML · CSS · JavaScript · GSAP · Git · GitHub Pages · Cloudflare Pages · Python
+
+---
+
+## AI-assisted development
+
+Claude Code was used throughout the project as a development partner rather than
+an autonomous builder.
+
+I used it for:
+
+- implementation and refactoring
+- debugging and investigating browser behaviour
+- image-processing workflows
+- font conversion and optimisation
+- accessibility and contrast calculations
+- exploring alternative solutions to technical problems
+
+I remained responsible for the design direction, technical decisions, evaluation
+criteria and final implementation.
+
+The project reinforced something I think is increasingly important when working
+with AI: knowing when the output is wrong can be more valuable than knowing how
+to generate it.
+
+---
+
+## Selected engineering challenges
+
+A few of the problems I encountered were less about writing code and more about
+understanding why seemingly reasonable solutions failed.
+
+### GSAP + complex border-radius interpolation
+
+GSAP did not correctly interpolate the eight-value blob shapes I was using, so I
+moved the morphing animation to CSS keyframes.
+
+### Smooth scrolling + fixed positioning
+
+ScrollSmoother's transformed wrapper changed the behaviour of `position: fixed`,
+so elements that needed viewport positioning were moved outside the smooth-scroll
+container.
+
+### Image background removal
+
+A simple white-pixel threshold would have removed parts of the actual product
+because the cookies contained white chocolate, coconut and lemon. I instead used
+flood fill from the image borders so only white connected to the background was
+removed.
+
+### Animation state management
+
+A `quickTo`-based magnetic button animation stopped working after its first
+interaction because a spring-back tween was overwriting the follow tweens. The
+fix required understanding GSAP's `overwrite` behaviour rather than simply
+increasing animation settings.
+
+---
+
+## Accessibility & performance
+
+- WCAG AA contrast checked programmatically
+- `prefers-reduced-motion` support
+- Touch-specific behaviour for mobile devices
+- Keyboard-accessible flavour interactions
+- Screen-reader announcements for game score changes
+- Self-hosted WOFF2 fonts
+- WebP image assets
+- Approximately 2.3 MB deployed
+
+---
 
 ## Running locally
 
@@ -122,12 +144,22 @@ python devserver.py
 
 Then open <http://localhost:5173>.
 
-Use `devserver.py` rather than `python -m http.server`: the built-in server
-sends no `Cache-Control`, so browsers hold on to stale CSS and JS and you end
-up debugging an edit that already shipped. This one sends `no-store`.
+The custom development server sends no-cache headers so the browser doesn't serve
+stale CSS and JavaScript during development.
 
-## Deployment
+---
 
-Deployed as a static site to GitHub Pages, with Cloudflare Pages as a second
-deploy from the same repository. No build command; the site root is the
-repository root.
+## Structure
+
+```
+index.html        homepage
+game.html         mini game
+css/style.css     site styles and design tokens
+css/game.css      game-only styles
+js/main.js        homepage motion
+js/game.js        game logic
+media/            optimised WebP assets
+fonts/            self-hosted WOFF2 fonts
+vendor/gsap/      pinned GSAP builds
+Assets/           working originals, git-ignored
+```
