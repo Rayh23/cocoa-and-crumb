@@ -73,13 +73,19 @@ and `--brown-deep` is reserved for shadows.
   shoot it top-down on white, then:
   1. Flood fill from the image borders, never a plain white threshold — a
      global key eats white chocolate chips, coconut and frosting.
-  2. Threshold around 210, not 240. A photo's edge is anti-aliased, so a high
-     threshold leaves a pale rim *inside* the mask.
-  3. Erode the mask ~3px so the boundary sits on real cookie pixels.
-  4. Extend cookie colour outward (nearest-neighbour via distance transform)
-     before feathering the alpha. Otherwise semi-transparent edge pixels keep
-     the white background colour, and the page background bleeds through the
-     outline. This is what went wrong on the coconut cookie.
+  2. Keep the threshold STRICT (~248). A lower threshold flood-fills straight
+     through white coconut flakes and frosting on the silhouette and tears
+     them into spikes. Measure it: perimeter / sqrt(area) went 5.28 -> 7.35
+     when the threshold dropped to 210.
+  3. Do NOT erode the mask. Erosion chews the same light details.
+  4. Extend cookie colour outward into the OUTSIDE pixels only
+     (nearest-neighbour via a distance transform), then feather the alpha
+     ~0.6px. Inside pixels must keep their real colour or white coconut gets
+     darkened into the chocolate.
+
+  Judge the result by eye on the actual background. A "share of light edge
+  pixels" metric cannot tell a white coconut flake from white background, and
+  optimising against it deletes real coconut.
 - **The blob morph is CSS, not GSAP** (`@keyframes blobMorph`). GSAP's string
   interpolation drops the `/` half of an 8-value `border-radius`, which
   flattens the blobs into squircles.
