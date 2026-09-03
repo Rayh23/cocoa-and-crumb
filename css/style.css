@@ -98,6 +98,8 @@ a{color:var(--brown);text-decoration:none}
   box-shadow:0 6px 0 -1px var(--brown-deep);
 }
 .btn:hover{transform:translateY(-3px);box-shadow:0 10px 0 -1px var(--brown-deep)}
+/* GSAP writes an inline transform on these, so the lift would fight the pull */
+.btn[data-magnetic]:hover,.btn[data-magnetic]:active{transform:none}
 .btn:active{transform:translateY(2px);box-shadow:0 3px 0 -1px var(--brown-deep)}
 .btn--ghost{background:transparent;color:var(--brown);box-shadow:0 6px 0 -1px var(--pink-deep)}
 .btn--ghost:hover{background:var(--pink-soft)}
@@ -349,7 +351,27 @@ a{color:var(--brown);text-decoration:none}
 .order .btn:hover{box-shadow:0 10px 0 -1px #e6ce77}
 
 /* ---------- footer ---------- */
-.footer{background:var(--brown);color:var(--cream);padding:2.5rem var(--gutter) 3.5rem;text-align:center}
+.footer{
+  background:var(--brown);color:var(--cream);
+  padding:2.5rem var(--gutter) 3.5rem;text-align:center;
+  position:relative;overflow:hidden;
+  /* Overlap the order section by 1px. Both are brown, but ScrollSmoother
+     translates by fractional pixels, so the seam between them rounds
+     independently and flashes a hairline of the cream body during scroll. */
+  margin-top:-1px;
+}
+.footer .wrap{position:relative;z-index:2}
+
+/* peach cutout doodles, same idea as the story section */
+.footer .doodles .doodle{color:var(--peach)}
+.footer .doodle--a{--d-size:44px; top:14%; left:7%;  transform:rotate(-14deg); opacity:.55}
+.footer .doodle--b{--d-size:78px; top:52%; left:16%; opacity:.4}
+.footer .doodle--c{--d-size:62px; top:20%; right:12%; left:auto; transform:rotate(10deg); opacity:.45}
+.footer .doodle--d{--d-size:30px; top:66%; right:24%; left:auto; transform:rotate(18deg); opacity:.6}
+.footer .doodle--e{--d-size:18px; top:30%; left:30%; opacity:.5}
+@media (max-width:900px){
+  .footer .doodle--b,.footer .doodle--e{display:none}
+}
 .footer img{width:64px;height:64px;border-radius:50%;margin:0 auto 1rem}
 .footer p{margin:.3rem 0;font-size:1.125rem;opacity:.92}
 .footer a{color:var(--yellow)}

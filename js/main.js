@@ -266,7 +266,59 @@
   }
 
   /* ---------------------------------------------------------
-     5. Chocolate chip cursor follower
+     5. Magnetic order buttons
+     The button leans toward the cursor while it is nearby, then springs
+     back when the cursor leaves its field. Order CTAs only.
+     --------------------------------------------------------- */
+  function magnetic() {
+    if (REDUCED) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    document.querySelectorAll("[data-magnetic]").forEach(function (btn) {
+      var PULL = 0.34;   // fraction of the cursor's offset the button travels
+      var FIELD = 80;    // how far outside the button the magnetism reaches
+
+      // quickTo reuses one tween per axis instead of allocating on every move
+      var xTo = gsap.quickTo(btn, "x", { duration: 0.4, ease: "power3" });
+      var yTo = gsap.quickTo(btn, "y", { duration: 0.4, ease: "power3" });
+      var inField = false;
+
+      window.addEventListener("pointermove", function (e) {
+        if (e.pointerType === "touch") return;
+
+        var r = btn.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        // elliptical field so wide buttons keep a sensible reach
+        var within = Math.abs(dx) < r.width / 2 + FIELD &&
+                     Math.abs(dy) < r.height / 2 + FIELD;
+
+        if (within) {
+          inField = true;
+          xTo(dx * PULL);
+          yTo(dy * PULL);
+        } else if (inField) {
+          // left the field: one springy tug back, then stop tracking
+          inField = false;
+          gsap.to(btn, {
+            x: 0, y: 0,
+            duration: 0.9,
+            ease: "elastic.out(1, 0.4)",
+            overwrite: true
+          });
+        }
+      }, { passive: true });
+
+      // keyboard and touch users never trigger the field, so make sure a
+      // focused button is never left offset
+      btn.addEventListener("blur", function () {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.4, ease: "power3.out", overwrite: true });
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     6. Chocolate chip cursor follower
      --------------------------------------------------------- */
   function cursorCookie() {
     if (REDUCED) return;
@@ -328,7 +380,7 @@
   }
 
   /* ---------------------------------------------------------
-     6. Generic scroll reveals
+     7. Generic scroll reveals
      --------------------------------------------------------- */
   function reveals() {
     var items = document.querySelectorAll("[data-fade]:not(.hero__inner [data-fade])");
@@ -351,6 +403,7 @@
     heroLaunch();
     badge();
     flavours();
+    magnetic();
     cursorCookie();
     reveals();
     ScrollTrigger.refresh();

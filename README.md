@@ -92,15 +92,26 @@ and `--brown-deep` is reserved for shadows.
   behind the wordmark, and brown text over a brown cookie loses contrast; the
   halo is invisible on flat pink but separates the type from anything passing
   behind it.
+- **Order CTAs are magnetic** (`[data-magnetic]`). They lean toward the cursor
+  at 0.34 of its offset while it is within 80px of the button, then spring back
+  with an elastic ease. GSAP owns their inline transform, so the CSS `:hover`
+  lift is disabled for them or the two fight.
+- **The footer overlaps the order section by 1px** (`margin-top:-1px`). Both are
+  brown, but ScrollSmoother translates by fractional pixels, so the seam rounds
+  independently and flashes a hairline of the cream body while scrolling.
 - `prefers-reduced-motion` is respected throughout.
 
 ## Running locally
 
 ```bash
-python -m http.server 5173
+python devserver.py
 ```
 
 Then open <http://localhost:5173>.
+
+Use `devserver.py` rather than `python -m http.server`: the built-in server
+sends no `Cache-Control`, so browsers hold on to stale CSS and JS and you end
+up debugging an edit that already shipped. This one sends `no-store`.
 
 ## Deployment
 
