@@ -151,7 +151,6 @@ a{color:var(--brown);text-decoration:none}
   text-transform:uppercase;
   letter-spacing:-.02em;
   line-height:.9;
-  text-shadow:0 0 6px var(--pink),0 0 14px var(--pink),0 0 26px var(--pink);
 }
 /* Each line is a flex row so "by Ray" can sit beside the last word. The
    slide-up reveal is clipped by .mask, not .line - putting overflow on the
@@ -178,7 +177,6 @@ a{color:var(--brown);text-decoration:none}
   max-width:44ch;margin:1.6rem auto 2.2rem;
   font-size:clamp(1.05rem,.95rem + .6vw,1.45rem);
   color:var(--brown);
-  text-shadow:0 0 6px var(--pink),0 0 14px var(--pink),0 0 26px var(--pink);
 }
 .hero__actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
