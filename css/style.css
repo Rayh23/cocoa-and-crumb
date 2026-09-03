@@ -143,7 +143,7 @@ a{color:var(--brown);text-decoration:none}
 .hero{
   position:relative;min-height:100svh;
   display:grid;place-items:center;
-  padding:7rem var(--gutter) 0;overflow:hidden;
+  padding:7rem var(--gutter) 5rem;overflow:hidden;
   background:var(--pink);
 }
 .hero__inner{max-width:var(--wrap-max);margin-inline:auto;text-align:center;position:relative;z-index:3}
@@ -180,7 +180,7 @@ a{color:var(--brown);text-decoration:none}
   font-size:clamp(1.05rem,.95rem + .6vw,1.45rem);
   color:var(--brown);
 }
-.hero__actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.hero__actions{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
 
 /* cookies launching up from the bottom edge */
 .hero__stage{

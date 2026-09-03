@@ -278,9 +278,16 @@
       var PULL = 0.34;   // fraction of the cursor's offset the button travels
       var FIELD = 80;    // how far outside the button the magnetism reaches
 
-      // quickTo reuses one tween per axis instead of allocating on every move
-      var xTo = gsap.quickTo(btn, "x", { duration: 0.4, ease: "power3" });
-      var yTo = gsap.quickTo(btn, "y", { duration: 0.4, ease: "power3" });
+      // quickTo reuses one tween per axis instead of allocating on every move.
+      // The release tween below uses overwrite, which KILLS these, so they are
+      // rebuilt on each entry into the field rather than created once. Without
+      // that, the first release permanently disables the effect.
+      var xTo, yTo;
+      function arm() {
+        xTo = gsap.quickTo(btn, "x", { duration: 0.4, ease: "power3" });
+        yTo = gsap.quickTo(btn, "y", { duration: 0.4, ease: "power3" });
+      }
+      arm();
       var inField = false;
 
       window.addEventListener("pointermove", function (e) {
@@ -294,7 +301,7 @@
                      Math.abs(dy) < r.height / 2 + FIELD;
 
         if (within) {
-          inField = true;
+          if (!inField) { arm(); inField = true; }   // re-arm after a release
           xTo(dx * PULL);
           yTo(dy * PULL);
         } else if (inField) {
