@@ -153,8 +153,6 @@
   .game-title small{font-size:.8rem;margin-top:.25rem}
   .game-bag__hint{font-size:.8rem}
 
-  /* the top-right link would sit under the HUD bar - move it out of the way */
-  .game-back{top:auto;bottom:1rem;left:1rem;right:auto}
 }
 
 /* back-to-site link */
@@ -166,4 +164,16 @@
   border-radius:var(--r-pill);padding:.45rem 1rem .45rem .5rem;
 }
 .game-back img{width:32px;height:32px;border-radius:50%}
-@media (max-width:640px){.game-back span{display:none}.game-back{padding:.4rem}}
+@media (max-width:640px){
+  .game-back span{display:none}
+  .game-back{
+    padding:.4rem;
+    /* must come after the base rule: a media query adds no specificity.
+       top/right are reset to auto or the link pins all four edges and
+       stretches to fill the screen. */
+    top:auto;
+    right:auto;
+    bottom:1rem;
+    left:1rem;
+  }
+}
